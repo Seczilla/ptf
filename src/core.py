@@ -51,7 +51,7 @@ class bcolors:
 
 # custom parser for zaproxy
 def zaproxy():
-    with urllib.request.rulopen('https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions.xml') as response:
+    with urllib.request.urlopen('https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions.xml') as response:
         data = response.read().decode('utf-8')
         for url in data.splitlines():
             if "Linux.tar.gz" in url and "<url>" in url: return url.rstrip().replace("<url>", "").replace("</url>", "").strip()
