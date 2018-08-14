@@ -8,7 +8,7 @@ import select
 import readline
 import glob
 import platform
-import urllib
+import urllib.request
 import sys
 
 # tab completion
@@ -51,10 +51,10 @@ class bcolors:
 
 # custom parser for zaproxy
 def zaproxy():
-    file = urllib.urlopen('https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions.xml')
-    data = file.readlines()
+    with urllib.request.rulopen('https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions.xml') as response:
+    data = response.read().decode('utf-8')
     file.close()
-    for url in data:
+    for url in data.splitlines():
         if "Linux.tar.gz" in url and "<url>" in url: return url.rstrip().replace("<url>", "").replace("</url>", "").strip()
 
 
